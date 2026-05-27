@@ -1,0 +1,61 @@
+<view class="page detail-page">
+  <view wx:if="{{error}}" class="error">{{error}}</view>
+
+  <view wx:if="{{loading}}" class="panel">
+    <view class="skeleton detail-skeleton"></view>
+    <view class="skeleton detail-skeleton short"></view>
+  </view>
+
+  <block wx:elif="{{result.issue}}">
+    <view class="panel">
+      <view class="row between">
+        <view>
+          <view class="panel-title">第 {{result.issue}} 期</view>
+          <view class="muted">{{result.drawDate}}</view>
+        </view>
+        <view class="tag">大乐透</view>
+      </view>
+
+      <view class="balls detail-balls">
+        <view wx:for="{{result.frontNumbers}}" wx:key="*this" class="ball ball-red">{{item}}</view>
+        <view wx:for="{{result.backNumbers}}" wx:key="*this" class="ball ball-blue">{{item}}</view>
+      </view>
+
+      <view class="metric-grid">
+        <view class="metric">
+          <view class="metric-label">销售额</view>
+          <view class="metric-value">{{result.salesText}}</view>
+        </view>
+        <view class="metric">
+          <view class="metric-label">奖池</view>
+          <view class="metric-value">{{result.poolText}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section panel">
+      <view class="panel-title">奖级明细</view>
+      <view wx:if="{{!result.prizeLevels.length}}" class="empty">暂无奖级明细。</view>
+      <view wx:else class="prize-table">
+        <view class="prize-row prize-head">
+          <text>奖级</text>
+          <text>中奖注数</text>
+          <text>单注奖金</text>
+        </view>
+        <view wx:for="{{result.prizeLevels}}" wx:key="name" class="prize-row">
+          <text>{{item.name}}</text>
+          <text>{{item.count}}</text>
+          <text>{{item.amount}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section panel source-panel">
+      <view class="panel-title">数据来源</view>
+      <view class="muted">本页展示公开开奖数据，中奖结果以中国体育彩票官方公告为准。</view>
+      <view class="muted source-time">更新时间：{{result.updatedAt || "暂无"}}</view>
+    </view>
+  </block>
+
+  <view wx:else class="panel empty">未找到该期开奖数据。</view>
+</view>

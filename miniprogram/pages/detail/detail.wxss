@@ -1,0 +1,69 @@
+.detail-skeleton {
+  margin-bottom: 24rpx;
+}
+
+.detail-skeleton.short {
+  width: 58%;
+  margin-bottom: 0;
+}
+
+.detail-balls {
+  margin-top: 36rpx;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18rpx;
+  margin-top: 32rpx;
+}
+
+.metric {
+  padding: 22rpx;
+  border-radius: 8rpx;
+  background: #f7f9fd;
+}
+
+.metric-label {
+  color: #68738d;
+  font-size: 22rpx;
+}
+
+.metric-value {
+  margin-top: 8rpx;
+  color: #17233f;
+  font-size: 30rpx;
+  font-weight: 800;
+}
+
+.prize-table {
+  margin-top: 24rpx;
+  border: 1rpx solid #e4e9f3;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.prize-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  min-height: 72rpx;
+  align-items: center;
+  padding: 0 18rpx;
+  border-top: 1rpx solid #e4e9f3;
+  color: #17233f;
+  font-size: 24rpx;
+}
+
+.prize-row:first-child {
+  border-top: 0;
+}
+
+.prize-head {
+  background: #edf3ff;
+  color: #0f3f8f;
+  font-weight: 700;
+}
+
+.source-time {
+  margin-top: 12rpx;
+}

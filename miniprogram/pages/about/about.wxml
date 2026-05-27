@@ -1,0 +1,26 @@
+<view class="page about-page">
+  <view class="panel">
+    <view class="panel-title">应用定位</view>
+    <view class="copy">本小程序仅提供超级大乐透公开开奖结果查询与历史数据检索，不提供购彩、代购、预测、推荐号码或任何投注引导。</view>
+  </view>
+
+  <view class="section panel">
+    <view class="panel-title">数据范围</view>
+    <view class="copy">收录 2015-01-03 以来的超级大乐透开奖数据。若目标日期无开奖，将展示当日无开奖，并提供相邻前后期开奖入口。</view>
+  </view>
+
+  <view class="section panel">
+    <view class="panel-title">数据来源</view>
+    <view class="copy">数据通过公开开奖结果查询接口同步，开奖结果、中奖情况与奖金信息以中国体育彩票官方公告为准。</view>
+  </view>
+
+  <view class="section panel">
+    <view class="panel-title">同步策略</view>
+    <view class="copy">开奖日周一、周三、周六 21:25 至 21:50 每分钟尝试同步一次。其余时间不进行高频轮询，必要时可由管理员手动同步。</view>
+  </view>
+
+  <view class="section panel">
+    <view class="panel-title">审核说明</view>
+    <view class="copy">发布前请确认小程序主体资质和服务类目，建议按“彩票 > 彩票资讯”准备说明材料，并明确本小程序无销售、无预测、无投注交易。</view>
+  </view>
+</view>

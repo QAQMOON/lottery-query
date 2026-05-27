@@ -1,0 +1,6 @@
+.copy {
+  margin-top: 18rpx;
+  color: #36435c;
+  font-size: 28rpx;
+  line-height: 1.75;
+}

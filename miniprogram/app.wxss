@@ -1,0 +1,144 @@
+page {
+  min-height: 100vh;
+  background: #f5f7fb;
+  color: #17233f;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+view,
+text,
+button,
+input,
+picker {
+  box-sizing: border-box;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 24rpx 24rpx 40rpx;
+}
+
+.section {
+  margin-top: 24rpx;
+}
+
+.panel {
+  background: #ffffff;
+  border: 1rpx solid #e4e9f3;
+  border-radius: 8rpx;
+  padding: 28rpx;
+  box-shadow: 0 10rpx 28rpx rgba(17, 36, 72, 0.06);
+}
+
+.panel-title {
+  color: #17233f;
+  font-size: 32rpx;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.muted {
+  color: #68738d;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.tag {
+  min-height: 44rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  background: #edf3ff;
+  color: #0f3f8f;
+  font-size: 22rpx;
+  line-height: 28rpx;
+}
+
+.balls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
+}
+
+.ball {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: inset 0 -6rpx 12rpx rgba(0, 0, 0, 0.18);
+}
+
+.ball-red {
+  background: #dc2f45;
+}
+
+.ball-blue {
+  background: #1664d9;
+}
+
+.btn {
+  min-height: 76rpx;
+  padding: 0 24rpx;
+  border-radius: 8rpx;
+  background: #0f3f8f;
+  color: #ffffff;
+  font-size: 28rpx;
+  line-height: 76rpx;
+  border: 0;
+}
+
+.btn::after {
+  border: 0;
+}
+
+.btn-secondary {
+  background: #edf3ff;
+  color: #0f3f8f;
+}
+
+.input {
+  height: 76rpx;
+  border: 1rpx solid #d9e1ee;
+  border-radius: 8rpx;
+  padding: 0 22rpx;
+  background: #ffffff;
+  color: #17233f;
+  font-size: 28rpx;
+}
+
+.empty {
+  padding: 44rpx 24rpx;
+  text-align: center;
+  color: #68738d;
+  font-size: 26rpx;
+  line-height: 1.6;
+}
+
+.error {
+  padding: 20rpx 24rpx;
+  border-radius: 8rpx;
+  background: #fff1f2;
+  color: #b42335;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.skeleton {
+  height: 32rpx;
+  border-radius: 8rpx;
+  background: linear-gradient(90deg, #eef2f8, #f8fafc, #eef2f8);
+}

@@ -1,0 +1,75 @@
+.filter-tip {
+  margin-top: 10rpx;
+}
+
+.filter-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+  margin-top: 24rpx;
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18rpx;
+}
+
+.picker-box {
+  height: 76rpx;
+  padding: 0 22rpx;
+  border: 1rpx solid #d9e1ee;
+  border-radius: 8rpx;
+  background: #ffffff;
+  color: #17233f;
+  font-size: 28rpx;
+  line-height: 76rpx;
+}
+
+.result-head {
+  padding: 0 4rpx;
+}
+
+.loading-panel {
+  margin-top: 18rpx;
+}
+
+.list-skeleton {
+  margin-bottom: 22rpx;
+}
+
+.list-skeleton.short {
+  width: 62%;
+  margin-bottom: 0;
+}
+
+.result-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+  margin-top: 18rpx;
+}
+
+.result-card {
+  padding: 24rpx;
+}
+
+.issue {
+  color: #17233f;
+  font-size: 30rpx;
+  font-weight: 800;
+}
+
+.card-balls {
+  margin-top: 22rpx;
+}
+
+.card-balls .ball {
+  width: 54rpx;
+  height: 54rpx;
+  font-size: 24rpx;
+}
+
+.load-more {
+  margin-top: 24rpx;
+}

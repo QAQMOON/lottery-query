@@ -1,0 +1,57 @@
+<view class="page history-page">
+  <view class="panel filter-panel">
+    <view class="panel-title">历史开奖结果查询</view>
+    <view class="muted filter-tip">支持按期号、年份或日期查询，收录范围从 2015-01-03 开始。</view>
+
+    <view class="filter-stack">
+      <input class="input" placeholder="输入期号，例如 24001" value="{{issue}}" bindinput="onIssueInput" />
+
+      <view class="filter-row">
+        <picker class="picker-box" mode="selector" range="{{years}}" value="{{yearIndex}}" bindchange="onYearChange">
+          <view>{{yearLabel}}</view>
+        </picker>
+        <picker class="picker-box" mode="date" value="{{date}}" start="2015-01-03" end="{{today}}" bindchange="onDateChange">
+          <view>{{date || "选择日期"}}</view>
+        </picker>
+      </view>
+
+      <view class="filter-row">
+        <button class="btn" bindtap="search">查询</button>
+        <button class="btn btn-secondary" bindtap="reset">重置</button>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{error}}" class="section error">{{error}}</view>
+
+  <view class="section result-head row between">
+    <view class="panel-title">查询结果</view>
+    <view class="muted">{{totalText}}</view>
+  </view>
+
+  <view wx:if="{{loading && !results.length}}" class="panel loading-panel">
+    <view class="skeleton list-skeleton"></view>
+    <view class="skeleton list-skeleton"></view>
+    <view class="skeleton list-skeleton short"></view>
+  </view>
+
+  <view wx:elif="{{!results.length}}" class="panel empty">暂无匹配开奖记录。</view>
+
+  <view wx:else class="result-list">
+    <view wx:for="{{results}}" wx:key="issue" class="panel result-card" bindtap="goDetail" data-issue="{{item.issue}}">
+      <view class="row between">
+        <view>
+          <view class="issue">第 {{item.issue}} 期</view>
+          <view class="muted">{{item.drawDate}}</view>
+        </view>
+        <view class="tag">详情</view>
+      </view>
+      <view class="balls card-balls">
+        <view wx:for="{{item.frontNumbers}}" wx:key="*this" class="ball ball-red">{{item}}</view>
+        <view wx:for="{{item.backNumbers}}" wx:key="*this" class="ball ball-blue">{{item}}</view>
+      </view>
+    </view>
+  </view>
+
+  <button wx:if="{{hasMore}}" class="btn load-more" bindtap="loadMore" loading="{{loading}}">加载更多</button>
+</view>
