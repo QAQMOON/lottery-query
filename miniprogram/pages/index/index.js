@@ -2,11 +2,14 @@ const api = require("../../utils/api");
 const dateUtil = require("../../utils/date");
 const lottery = require("../../utils/lottery");
 
+const LOTTERY_TYPES = [
+  { key: "dlt", name: "大乐透", startYear: 2015 },
+  { key: "ssq", name: "双色球", startYear: 2003 }
+];
+
 function withDisplay(result) {
   const mapped = lottery.mapResult(result);
-  if (!mapped) {
-    return {};
-  }
+  if (!mapped) return {};
   return {
     ...mapped,
     salesText: lottery.formatAmount(mapped.salesAmount),
@@ -16,6 +19,8 @@ function withDisplay(result) {
 
 Page({
   data: {
+    lotteryTypes: LOTTERY_TYPES,
+    currentType: "dlt",
     loading: true,
     refreshing: false,
     error: "",
@@ -37,6 +42,13 @@ Page({
     this.loadAll().finally(() => wx.stopPullDownRefresh());
   },
 
+  switchType(event) {
+    const type = event.currentTarget.dataset.type;
+    if (type === this.data.currentType) return;
+    this.setData({ currentType: type });
+    this.loadAll();
+  },
+
   loadAll() {
     this.setData({ loading: true, error: "" });
     return Promise.all([this.loadLatest(), this.loadQuickItems()])
@@ -49,7 +61,7 @@ Page({
   },
 
   loadLatest() {
-    return api.getLatest().then((data) => {
+    return api.getLatest(this.data.currentType).then((data) => {
       const latest = withDisplay(data.result);
       this.setData({
         latest,
@@ -59,7 +71,7 @@ Page({
   },
 
   loadQuickItems() {
-    return api.getRelative({ baseDate: this.data.today }).then((data) => {
+    return api.getRelative({ lotteryType: this.data.currentType, baseDate: this.data.today }).then((data) => {
       const items = this.data.quickItems.map((item) => {
         const entry = data[item.type] || {};
         return {
@@ -82,22 +94,18 @@ Page({
   },
 
   goLatestDetail() {
-    if (!this.data.latest.issue) {
-      return;
-    }
+    if (!this.data.latest.issue) return;
     wx.navigateTo({
-      url: `/pages/detail/detail?issue=${this.data.latest.issue}`
+      url: `/pages/detail/detail?issue=${this.data.latest.issue}&type=${this.data.currentType}`
     });
   },
 
   openQuick(event) {
     const type = event.currentTarget.dataset.type;
     const item = this.data.quickItems.find((entry) => entry.type === type);
-    if (!item) {
-      return;
-    }
+    if (!item) return;
     if (item.result && item.result.issue) {
-      wx.navigateTo({ url: `/pages/detail/detail?issue=${item.result.issue}` });
+      wx.navigateTo({ url: `/pages/detail/detail?issue=${item.result.issue}&type=${this.data.currentType}` });
       return;
     }
     this.goHistoryWithDate(item.targetDate);
@@ -105,20 +113,18 @@ Page({
 
   openAdjacent(event) {
     const issue = event.currentTarget.dataset.issue;
-    if (!issue) {
-      return;
-    }
-    wx.navigateTo({ url: `/pages/detail/detail?issue=${issue}` });
+    if (!issue) return;
+    wx.navigateTo({ url: `/pages/detail/detail?issue=${issue}&type=${this.data.currentType}` });
   },
 
   goHistoryWithDate(date) {
-    if (date) {
-      wx.setStorageSync("history_query_date", date);
-    }
+    if (date) wx.setStorageSync("history_query_date", date);
+    wx.setStorageSync("history_lottery_type", this.data.currentType);
     wx.switchTab({ url: "/pages/history/history" });
   },
 
   goHistory() {
+    wx.setStorageSync("history_lottery_type", this.data.currentType);
     wx.switchTab({ url: "/pages/history/history" });
   },
 

@@ -2,10 +2,15 @@ const api = require("../../utils/api");
 const dateUtil = require("../../utils/date");
 const lottery = require("../../utils/lottery");
 
-function createYears() {
+const LOTTERY_TYPES = [
+  { key: "dlt", name: "大乐透", startDate: "2015-01-03", startYear: 2015 },
+  { key: "ssq", name: "双色球", startDate: "2003-02-23", startYear: 2003 }
+];
+
+function createYears(startYear) {
   const current = new Date().getFullYear();
   const years = ["全部年份"];
-  for (let year = current; year >= 2015; year -= 1) {
+  for (let year = current; year >= startYear; year -= 1) {
     years.push(String(year));
   }
   return years;
@@ -13,8 +18,11 @@ function createYears() {
 
 Page({
   data: {
+    lotteryTypes: LOTTERY_TYPES,
+    currentType: "dlt",
     today: dateUtil.todayText(),
-    years: createYears(),
+    startDate: "2015-01-03",
+    years: createYears(2015),
     yearIndex: 0,
     yearLabel: "全部年份",
     issue: "",
@@ -31,12 +39,17 @@ Page({
   },
 
   onLoad(options) {
-    if (options.date) {
-      this.setData({ date: options.date });
-    }
+    if (options.date) this.setData({ date: options.date });
   },
 
   onShow() {
+    const pendingType = wx.getStorageSync("history_lottery_type");
+    if (pendingType && pendingType !== this.data.currentType) {
+      wx.removeStorageSync("history_lottery_type");
+      this.switchType({ currentTarget: { dataset: { type: pendingType } } });
+      return;
+    }
+
     const pendingDate = wx.getStorageSync("history_query_date");
     if (pendingDate) {
       wx.removeStorageSync("history_query_date");
@@ -61,6 +74,22 @@ Page({
     this.search().finally(() => wx.stopPullDownRefresh());
   },
 
+  switchType(event) {
+    const type = event.currentTarget.dataset.type;
+    if (type === this.data.currentType) return;
+    const config = LOTTERY_TYPES.find(t => t.key === type);
+    this.setData({
+      currentType: type,
+      startDate: config.startDate,
+      years: createYears(config.startYear),
+      yearIndex: 0,
+      yearLabel: "全部年份",
+      issue: "",
+      date: ""
+    });
+    this.search();
+  },
+
   onIssueInput(event) {
     this.setData({ issue: event.detail.value.trim() });
   },
@@ -83,12 +112,7 @@ Page({
   },
 
   search() {
-    this.setData({
-      page: 1,
-      results: [],
-      hasMore: false,
-      error: ""
-    });
+    this.setData({ page: 1, results: [], hasMore: false, error: "" });
     return this.load();
   },
 
@@ -103,9 +127,7 @@ Page({
   },
 
   loadMore() {
-    if (this.data.loading || !this.data.hasMore) {
-      return;
-    }
+    if (this.data.loading || !this.data.hasMore) return;
     this.setData({ page: this.data.page + 1 });
     this.load(true);
   },
@@ -115,6 +137,7 @@ Page({
     this.setData({ loading: true });
 
     return api.queryHistory({
+      lotteryType: this.data.currentType,
       issue: this.data.issue,
       date: this.data.date,
       year,
@@ -140,7 +163,7 @@ Page({
   goDetail(event) {
     const issue = event.currentTarget.dataset.issue;
     wx.navigateTo({
-      url: `/pages/detail/detail?issue=${issue}`
+      url: `/pages/detail/detail?issue=${issue}&type=${this.data.currentType}`
     });
   }
 });

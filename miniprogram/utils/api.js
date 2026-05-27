@@ -5,22 +5,17 @@ function callLottery(action, data = {}) {
 
   return wx.cloud.callFunction({
     name: "lottery",
-    data: {
-      action,
-      ...data
-    }
+    data: { action, ...data }
   }).then((res) => {
     const result = res.result || {};
-    if (!result.success) {
-      throw new Error(result.message || "请求失败");
-    }
+    if (!result.success) throw new Error(result.message || "请求失败");
     return result.data;
   });
 }
 
 module.exports = {
-  getLatest() {
-    return callLottery("getLatest");
+  getLatest(lotteryType = "dlt") {
+    return callLottery("getLatest", { lotteryType });
   },
 
   queryHistory(params) {
@@ -35,7 +30,7 @@ module.exports = {
     return callLottery("getRelative", params);
   },
 
-  syncLatest() {
-    return callLottery("syncLatest");
+  syncLatest(lotteryType = "dlt") {
+    return callLottery("syncLatest", { lotteryType });
   }
 };

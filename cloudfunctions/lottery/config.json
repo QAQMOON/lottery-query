@@ -4,6 +4,11 @@
       "name": "sync-dlt-draw-window",
       "type": "timer",
       "config": "0 25-50 21 * * MON,WED,SAT *"
+    },
+    {
+      "name": "sync-ssq-draw-window",
+      "type": "timer",
+      "config": "0 25-50 21 * * TUE,THU,SUN *"
     }
   ]
 }

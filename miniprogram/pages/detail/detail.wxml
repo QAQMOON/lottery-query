@@ -13,7 +13,7 @@
           <view class="panel-title">第 {{result.issue}} 期</view>
           <view class="muted">{{result.drawDate}}</view>
         </view>
-        <view class="tag">大乐透</view>
+        <view class="tag">{{lotteryName}}</view>
       </view>
 
       <view class="balls detail-balls">

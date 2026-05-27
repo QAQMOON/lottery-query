@@ -1,7 +1,17 @@
 <view class="page history-page">
+  <view class="type-tabs">
+    <view
+      wx:for="{{lotteryTypes}}"
+      wx:key="key"
+      class="type-tab {{currentType === item.key ? 'active' : ''}}"
+      bindtap="switchType"
+      data-type="{{item.key}}"
+    >{{item.name}}</view>
+  </view>
+
   <view class="panel filter-panel">
     <view class="panel-title">历史开奖结果查询</view>
-    <view class="muted filter-tip">支持按期号、年份或日期查询，收录范围从 2015-01-03 开始。</view>
+    <view class="muted filter-tip">支持按期号、年份或日期查询。</view>
 
     <view class="filter-stack">
       <input class="input" placeholder="输入期号，例如 24001" value="{{issue}}" bindinput="onIssueInput" />
@@ -10,7 +20,7 @@
         <picker class="picker-box" mode="selector" range="{{years}}" value="{{yearIndex}}" bindchange="onYearChange">
           <view>{{yearLabel}}</view>
         </picker>
-        <picker class="picker-box" mode="date" value="{{date}}" start="2015-01-03" end="{{today}}" bindchange="onDateChange">
+        <picker class="picker-box" mode="date" value="{{date}}" start="{{startDate}}" end="{{today}}" bindchange="onDateChange">
           <view>{{date || "选择日期"}}</view>
         </picker>
       </view>

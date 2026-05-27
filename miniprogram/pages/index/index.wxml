@@ -1,11 +1,20 @@
 <view class="page index-page">
   <view class="hero">
     <view>
-      <view class="hero-kicker">超级大乐透</view>
-      <view class="hero-title">开奖结果查询</view>
-      <view class="hero-subtitle">收录 2015-01-03 以来公开开奖数据</view>
+      <view class="hero-kicker">开奖结果查询</view>
+      <view class="hero-title">彩票查询</view>
     </view>
     <button class="refresh-btn" bindtap="handleRefresh" loading="{{refreshing}}">刷新</button>
+  </view>
+
+  <view class="type-tabs">
+    <view
+      wx:for="{{lotteryTypes}}"
+      wx:key="key"
+      class="type-tab {{currentType === item.key ? 'active' : ''}}"
+      bindtap="switchType"
+      data-type="{{item.key}}"
+    >{{item.name}}</view>
   </view>
 
   <view wx:if="{{error}}" class="section error">{{error}}</view>
