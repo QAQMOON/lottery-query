@@ -8,21 +8,13 @@
 C:\Users\111\projects\dlt-lottery-miniapp
 ```
 
-确认 AppID：
-
-```text
-wxfeef5b2b429cc576
-```
+确认 AppID（在微信公众平台获取）。
 
 ## 2. 开通云开发
 
 在微信开发者工具中开通云开发，复制环境 ID。
 
-当前已配置：
-
-```text
-cloud1-d5gvlaubhbbbfcdd2
-```
+请在云开发控制台获取环境 ID 并配置。
 
 对应文件：
 

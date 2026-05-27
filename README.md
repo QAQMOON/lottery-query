@@ -39,17 +39,9 @@ APIHZ_ID=你的接口盒子 ID
 APIHZ_KEY=你的接口盒子 KEY
 ```
 
-AppID 已写入 `project.config.json`：
+请在 `project.config.json` 中填写你的 AppID。
 
-```text
-wxfeef5b2b429cc576
-```
-
-云开发环境 ID 已写入 `miniprogram/app.js`：
-
-```text
-cloud1-d5gvlaubhbbbfcdd2
-```
+请在 `miniprogram/app.js` 中填写你的云开发环境 ID。
 
 ## 云数据库集合
 
@@ -107,7 +99,7 @@ cloudfunctions/lottery/config.json
 
 1. 打开微信开发者工具
 2. 导入本目录
-3. AppID 使用 `wxfeef5b2b429cc576`
+3. 填写你的 AppID
 4. 开通云开发并填写 `envId`
 5. 上传并部署 `cloudfunctions/lottery`
 6. 可选配置云函数环境变量 `APIHZ_ID`、`APIHZ_KEY`

@@ -1,6 +1,6 @@
 App({
   globalData: {
-    envId: "cloud1-d5gvlaubhbbbfcdd2"
+    envId: "你的云环境ID"
   },
 
   onLaunch() {
